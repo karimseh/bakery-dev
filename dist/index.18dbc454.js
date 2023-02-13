@@ -557,7 +557,130 @@ function hmrAccept(bundle, id) {
 }
 
 },{}],"1SICI":[function(require,module,exports) {
+var _animations = require("./Animations");
+const text_container = document.querySelector(".text_container");
+const SMOBILE = "(max-width: 320px)";
+const TABLET = "(max-width: 768px)";
+const LAPTOP = "(max-width: 1024px)";
+document.addEventListener("DOMContentLoaded", ()=>{
+    (0, _animations.animateLogo)();
+    if (window.matchMedia(SMOBILE).matches) {
+        console.log("MOBILE YRAH");
+        text_container.innerHTML = `<div class="text_line">
+        <div class="line"><p>La Patisserie Alexis Ladvie</p></div>
+        <div class="line_mask test" ></div>
+      </div>
+      <div class="text_line">
+      <div class="line"><p>est un endroit où l'on peut </p></div>
+        <div class="line_mask" ></div>
+      </div>
+    
+      <div class="text_line">
+      <div class="line"><p>déguster des pâtisseries </p></div>
+        <div class="line_mask"></div>
+      </div>
+    
+      <div class="text_line">
+        <div class="line"><p>délicieuses et  </p></div>
+        <div class="line_mask" ></div>
+      </div>
+    
+      <div class="text_line">
+      <div class="line"><p>soigneusement </p></div>
+      <div class="line_mask" ></div>
+      </div>
+    
+      <div class="text_line">
+      <div class="line"><p>confectionnées. Parmi les  </p></div>
+      <div class="line_mask" ></div>
+      </div>
+      <div class="text_line">
+      <div class="line"><p>gâteaux les plus populaires, </p></div>
+        <div class="line_mask"></div>
+        </div>
+      <div class="text_line">
+      <div class="line"><p>on retrouve l'éclair au   </p></div>
+      <div class="line_mask"></div>
+      </div>
+      <div class="text_line">
+      <div class="line"><p>chocolat, la tarte au citron, </p></div>
+      <div class="line_mask" ></div>
+      </div><div class="text_line">
+      <div class="line"><p>et le mille-feuille aux </p></div>
+      <div class="line_mask"></div>
+      </div><div class="text_line">
+      <div class="line"><p>framboises.</p></div>
+      <div class="line_mask" ></div>
+      </div>`;
+        (0, _animations.text_mask)();
+        (0, _animations.images_anim)(15, 20, ".image_container", "=+5 =-5", `${document.querySelector(".image_container").offsetHeight} 100px`);
+        (0, _animations.text_scroll)();
+    } else if (window.matchMedia(TABLET).matches) {
+        text_container.innerHTML = `<div class="text_line">
+    <div class="line"><p>La Patisserie Alexis Ladvie</p></div>
+    <div class="line_mask test" ></div>
+  </div>
+  <div class="text_line">
+  <div class="line"><p>est un endroit où l'on peut </p></div>
+    <div class="line_mask" ></div>
+  </div>
+
+  <div class="text_line">
+  <div class="line"><p>déguster des pâtisseries </p></div>
+    <div class="line_mask"></div>
+  </div>
+
+  <div class="text_line">
+    <div class="line"><p>délicieuses et  </p></div>
+    <div class="line_mask" ></div>
+  </div>
+
+  <div class="text_line">
+  <div class="line"><p>soigneusement </p></div>
+  <div class="line_mask" ></div>
+  </div>
+
+  <div class="text_line">
+  <div class="line"><p>confectionnées. Parmi les  </p></div>
+  <div class="line_mask" ></div>
+  </div>
+  <div class="text_line">
+  <div class="line"><p>gâteaux les plus populaires, </p></div>
+    <div class="line_mask"></div>
+    </div>
+  <div class="text_line">
+  <div class="line"><p>on retrouve l'éclair au   </p></div>
+  <div class="line_mask"></div>
+  </div>
+  <div class="text_line">
+  <div class="line"><p>chocolat, la tarte au citron, </p></div>
+  <div class="line_mask" ></div>
+  </div><div class="text_line">
+  <div class="line"><p>et le mille-feuille aux </p></div>
+  <div class="line_mask"></div>
+  </div><div class="text_line">
+  <div class="line"><p>framboises.</p></div>
+  <div class="line_mask" ></div>
+  </div>`;
+        (0, _animations.text_mask)();
+        (0, _animations.images_anim)(15, 20, ".presentation", "=+5 =-5", "bottom 20%");
+        (0, _animations.text_scroll)();
+    } else {
+        (0, _animations.text_mask)();
+        (0, _animations.images_anim)(15, 20, ".presentation", "=+5 =-5", "bottom 20%");
+        (0, _animations.text_scroll)();
+        (0, _animations.animScrollImage)();
+    }
+});
+
+},{"./Animations":"evgqe"}],"evgqe":[function(require,module,exports) {
 var parcelHelpers = require("@parcel/transformer-js/src/esmodule-helpers.js");
+parcelHelpers.defineInteropFlag(exports);
+parcelHelpers.export(exports, "animateLogo", ()=>animateLogo);
+parcelHelpers.export(exports, "text_mask", ()=>text_mask);
+parcelHelpers.export(exports, "images_anim", ()=>images_anim);
+parcelHelpers.export(exports, "text_scroll", ()=>text_scroll);
+parcelHelpers.export(exports, "animScrollImage", ()=>animScrollImage);
 var _gsap = require("gsap");
 var _gsapDefault = parcelHelpers.interopDefault(_gsap);
 var _textPlugin = require("gsap/TextPlugin");
@@ -565,148 +688,168 @@ var _textPluginDefault = parcelHelpers.interopDefault(_textPlugin);
 var _scrollTrigger = require("gsap/ScrollTrigger");
 var _scrollTriggerDefault = parcelHelpers.interopDefault(_scrollTrigger);
 (0, _gsapDefault.default).registerPlugin((0, _textPluginDefault.default), (0, _scrollTriggerDefault.default));
-const timeline = (0, _gsapDefault.default).timeline();
-var tl1 = (0, _gsapDefault.default).timeline();
-tl1.from(".top-square", {
-    duration: 1,
-    y: -100,
-    ease: "back.out(1.4)"
-});
-var tl2 = (0, _gsapDefault.default).timeline();
-tl2.from(".bottom-square", {
-    duration: 1,
-    y: 100,
-    ease: "back.out(1.4)"
-});
-timeline.from(".logo_container", {
-    opacity: 0,
-    scale: 0.8,
-    filter: "blur(4px)",
-    duration: 2.5,
-    ease: "sine.out"
-}).to("#choix_text", {
-    duration: 1,
-    ease: "steps(25)",
-    text: "Choisissez votre parfum :"
-}).from(".parfum", {
-    duration: 1,
-    y: 10,
-    ease: "expo.out",
-    opacity: 0,
-    stagger: {
-        each: 0.5
-    }
-}).to(".parfum", {
-    y: 5,
-    duration: 2,
-    ease: "expo.out",
-    stagger: {
-        each: 0.5,
+function animateLogo() {
+    const timeline = (0, _gsapDefault.default).timeline();
+    const tl1 = (0, _gsapDefault.default).timeline();
+    const tl2 = (0, _gsapDefault.default).timeline();
+    tl1.from(".top-square", {
+        duration: 1,
+        y: -100,
+        ease: "back.out(1.4)"
+    });
+    tl2.from(".bottom-square", {
+        duration: 1,
+        y: 100,
+        ease: "back.out(1.4)"
+    });
+    timeline.from(".logo_container", {
+        opacity: 0,
+        scale: 0.8,
+        filter: "blur(4px)",
+        duration: 2.5,
+        ease: "sine.out"
+    }).to("#choix_text", {
+        duration: 1,
+        ease: "steps(25)",
+        text: "Choisissez votre parfum :"
+    }).from(".parfum", {
+        duration: 1,
+        y: 10,
+        ease: "expo.out",
+        opacity: 0,
+        stagger: {
+            each: 0.5
+        }
+    }).to(".parfum", {
+        y: 5,
+        duration: 2,
+        ease: "expo.out",
+        stagger: {
+            each: 0.5,
+            repeat: -1,
+            yoyo: true
+        }
+    });
+}
+const text_mask = ()=>{
+    (0, _gsapDefault.default).to(".line_mask", {
+        width: 0,
+        scrollTrigger: {
+            trigger: ".line_mask",
+            scrub: 2
+        },
+        stagger: 2,
+        duration: 2,
+        ease: "slow(0.1, 0.4, false)"
+    });
+};
+const images_anim = (x, y, trigger, start, end)=>{
+    (0, _gsapDefault.default).from(".background_image", {
+        opacity: 0,
+        y: -15,
+        duration: 1,
+        scrollTrigger: {
+            trigger: trigger,
+            toggleActions: "restart none none pause"
+        }
+    });
+    (0, _gsapDefault.default).to(".image_container", {
+        y: 3,
+        duration: 2.5,
         repeat: -1,
         yoyo: true
-    }
-});
-// gsap.fromTo(
-//   ".fondant",
-//   { height: 0 },
-//   {
-//     height: "70%",
-//     borderRadius: 0,
-//     duration: 2,
-//     ease: "expo.out",
-//     stagger: {
-//       each: 0.1,
-//       from : "center"
-//     }
-//   }
-// );
-let start_mobile = "=-50 center";
-let end_mobile = "=-500 30%";
-if (window.matchMedia("(max-width: 700px)").matches) {
-    document.querySelector(".text_container").innerHTML = `
-  <div class="text_line">
-    <div class="line"><p>La Patisserie Alexis Ladvie</p></div>
-    <div class="line_mask test" style="width: 0px;"></div>
-  </div>
-  <div class="text_line">
-  <div class="line"><p>est un endroit où l'on peut </p></div>
-    <div class="line_mask" style="width: 0px;"></div>
-  </div>
-
-  <div class="text_line">
-  <div class="line"><p>déguster des pâtisseries </p></div>
-    <div class="line_mask" style="width: 0px;"></div>
-  </div>
-
-  <div class="text_line">
-    <div class="line"><p>délicieuses et  </p></div>
-    <div class="line_mask" style="width: 0px;"></div>
-  </div>
-  
-  <div class="text_line">
-  <div class="line"><p>soigneusement </p></div>
-  <div class="line_mask" style="width: 56px;"></div>
-  </div>
-  
-  <div class="text_line">
-  <div class="line"><p>confectionnées. Parmi les  </p></div>
-  <div class="line_mask" style="width: 314px;"></div>
-  </div>
-  <div class="text_line">
-  <div class="line"><p>gâteaux les plus populaires, </p></div>
-    <div class="line_mask" style="width: 314px;"></div>
-    </div>
-  <div class="text_line">
-  <div class="line"><p>on retrouve l'éclair au   </p></div>
-  <div class="line_mask" style="width: 314px;"></div>
-  </div>
-  <div class="text_line">
-  <div class="line"><p>chocolat, la tarte au citron, </p></div>
-  <div class="line_mask" style="width: 314px;"></div>
-  </div><div class="text_line">
-  <div class="line"><p>et le mille-feuille aux </p></div>
-  <div class="line_mask" style="width: 314px;"></div>
-  </div><div class="text_line">
-    <div class="line"><p>framboises.</p></div>
-    <div class="line_mask" style="width: 314px;"></div>
-    </div>`;
-    (0, _gsapDefault.default).from(".image", {
-        x: 50,
-        y: 100,
-        scrollTrigger: {
-            trigger: ".presentation",
-            start: start_mobile,
-            endTrigger: ".line_mask",
-            end: end_mobile,
-            scrub: true
-        },
-        opacity: 0,
-        duration: 0.5
     });
-} else (0, _gsapDefault.default).from(".image", {
-    x: 50,
-    y: 100,
-    scrollTrigger: {
-        trigger: ".presentation",
-        start: "top center",
-        endTrigger: ".line_mask",
-        end: "end 20%",
-        scrub: true
-    },
-    opacity: 0,
-    duration: 0.5
-});
-(0, _gsapDefault.default).to(".line_mask", {
-    width: 0,
-    scrollTrigger: {
-        trigger: ".line_mask",
-        scrub: true
-    },
-    stagger: 1,
-    duration: 1
-});
+    const timeline = (0, _gsapDefault.default).timeline({
+        scrollTrigger: {
+            trigger: trigger,
+            start: start,
+            end: end,
+            pin: ".presentation",
+            pinSpacing: false,
+            scrub: true,
+            markers: true
+        }
+    });
+    timeline.from(".one", {
+        x: x,
+        y: y,
+        opacity: 0,
+        duration: 2
+    }).from(".two", {
+        x: -x,
+        opacity: 0,
+        rotateY: -30,
+        duration: 2,
+        ease: "expo.out"
+    }).from(".three", {
+        x: x,
+        opacity: 0,
+        rotateY: 30,
+        duration: 2,
+        ease: "expo.out"
+    });
+    (0, _gsapDefault.default).to("#circle", {
+        x: 5,
+        y: 8,
+        z: 5,
+        duration: 3,
+        ease: "power2.out",
+        repeat: -1,
+        yoyo: true
+    });
+    (0, _gsapDefault.default).to("#eclipse", {
+        x: 3,
+        y: 2,
+        z: 5,
+        rotation: -1,
+        duration: 3,
+        ease: "power2.out",
+        repeat: -1,
+        yoyo: true
+    });
+    (0, _gsapDefault.default).to("#triangle", {
+        y: 5,
+        z: 5,
+        rotation: -2,
+        duration: 3,
+        ease: "power2.out",
+        repeat: -1,
+        yoyo: true
+    });
+};
+const text_scroll = ()=>{
+    const containerWidth = document.querySelector(".text_anim").offsetWidth;
+    (0, _gsapDefault.default).to(".text > div", {
+        x: "-100%",
+        duration: 3 * containerWidth / 100,
+        ease: "none",
+        repeat: -1
+    });
+};
+const animScrollImage = ()=>{
+    (0, _gsapDefault.default).to(".gateaux:not(.opposite) .image_gateaux", {
+        width: "50%",
+        duration: 1.2,
+        scrollTrigger: {
+            trigger: ".gateaux",
+            pin: true,
+            pinSpacing: false,
+            scrub: 1
+        }
+    });
+    (0, _gsapDefault.default).to(".gateaux.opposite .image_gateaux", {
+        width: "50%",
+        duration: 1.2,
+        scrollTrigger: {
+            trigger: ".gateaux.opposite",
+            pin: true,
+            pinSpacing: false,
+            scrub: 1
+        }
+    });
+};
 
-},{"gsap":"fPSuC","gsap/TextPlugin":"9TeAU","@parcel/transformer-js/src/esmodule-helpers.js":"gkKU3","gsap/ScrollTrigger":"7wnFk"}],"fPSuC":[function(require,module,exports) {
+},{"gsap":"fPSuC","gsap/TextPlugin":"9TeAU","gsap/ScrollTrigger":"7wnFk","@parcel/transformer-js/src/esmodule-helpers.js":"gkKU3"}],"fPSuC":[function(require,module,exports) {
 var parcelHelpers = require("@parcel/transformer-js/src/esmodule-helpers.js");
 parcelHelpers.defineInteropFlag(exports);
 parcelHelpers.export(exports, "gsap", ()=>gsapWithCSS);
