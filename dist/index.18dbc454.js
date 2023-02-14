@@ -562,7 +562,8 @@ const text_container = document.querySelector(".text_container");
 const SMOBILE = "(max-width: 320px)";
 const TABLET = "(max-width: 768px)";
 const LAPTOP = "(max-width: 1024px)";
-document.addEventListener("DOMContentLoaded", ()=>{
+window.addEventListener("load", ()=>{
+    document.getElementById("loading-screen").style.display = "none";
     (0, _animations.animateLogo)();
     if (window.matchMedia(SMOBILE).matches) {
         console.log("MOBILE YRAH");
@@ -613,7 +614,57 @@ document.addEventListener("DOMContentLoaded", ()=>{
       <div class="line_mask" ></div>
       </div>`;
         (0, _animations.text_mask)();
-        (0, _animations.images_anim)(15, 20, ".image_container", "=+5 =-5", `${document.querySelector(".image_container").offsetHeight} 100px`);
+        (0, _animations.images_anim)(100, ".image_container", "=+5 =-5", `${document.querySelector(".presentation").offsetHeight} 100px`);
+        (0, _animations.text_scroll)();
+    } else if (window.matchMedia("(max-width: 750px)").matches) {
+        text_container.innerHTML = `<div class="text_line">
+    <div class="line"><p>La Patisserie Alexis Ladvie</p></div>
+    <div class="line_mask test" ></div>
+  </div>
+  <div class="text_line">
+  <div class="line"><p>est un endroit où l'on peut </p></div>
+    <div class="line_mask" ></div>
+  </div>
+
+  <div class="text_line">
+  <div class="line"><p>déguster des pâtisseries </p></div>
+    <div class="line_mask"></div>
+  </div>
+
+  <div class="text_line">
+    <div class="line"><p>délicieuses et  </p></div>
+    <div class="line_mask" ></div>
+  </div>
+
+  <div class="text_line">
+  <div class="line"><p>soigneusement </p></div>
+  <div class="line_mask" ></div>
+  </div>
+
+  <div class="text_line">
+  <div class="line"><p>confectionnées. Parmi les  </p></div>
+  <div class="line_mask" ></div>
+  </div>
+  <div class="text_line">
+  <div class="line"><p>gâteaux les plus populaires, </p></div>
+    <div class="line_mask"></div>
+    </div>
+  <div class="text_line">
+  <div class="line"><p>on retrouve l'éclair au   </p></div>
+  <div class="line_mask"></div>
+  </div>
+  <div class="text_line">
+  <div class="line"><p>chocolat, la tarte au citron, </p></div>
+  <div class="line_mask" ></div>
+  </div><div class="text_line">
+  <div class="line"><p>et le mille-feuille aux </p></div>
+  <div class="line_mask"></div>
+  </div><div class="text_line">
+  <div class="line"><p>framboises.</p></div>
+  <div class="line_mask" ></div>
+  </div>`;
+        (0, _animations.text_mask)();
+        (0, _animations.images_anim)(100, ".presentation", "=+5 =-5", "bottom 20%");
         (0, _animations.text_scroll)();
     } else if (window.matchMedia(TABLET).matches) {
         text_container.innerHTML = `<div class="text_line">
@@ -663,11 +714,11 @@ document.addEventListener("DOMContentLoaded", ()=>{
   <div class="line_mask" ></div>
   </div>`;
         (0, _animations.text_mask)();
-        (0, _animations.images_anim)(15, 20, ".presentation", "=+5 =-5", "bottom 20%");
+        (0, _animations.images_anim)(20, ".presentation", "=+5 =-5", "bottom 20%");
         (0, _animations.text_scroll)();
     } else {
         (0, _animations.text_mask)();
-        (0, _animations.images_anim)(15, 20, ".presentation", "=+5 =-5", "bottom 20%");
+        (0, _animations.images_anim)(100, ".presentation", "=-40 =-5", "bottom 35%");
         (0, _animations.text_scroll)();
         (0, _animations.animScrollImage)();
     }
@@ -690,14 +741,12 @@ var _scrollTriggerDefault = parcelHelpers.interopDefault(_scrollTrigger);
 (0, _gsapDefault.default).registerPlugin((0, _textPluginDefault.default), (0, _scrollTriggerDefault.default));
 function animateLogo() {
     const timeline = (0, _gsapDefault.default).timeline();
-    const tl1 = (0, _gsapDefault.default).timeline();
-    const tl2 = (0, _gsapDefault.default).timeline();
-    tl1.from(".top-square", {
+    (0, _gsapDefault.default).from(".top-square", {
         duration: 1,
         y: -100,
         ease: "back.out(1.4)"
     });
-    tl2.from(".bottom-square", {
+    (0, _gsapDefault.default).from(".bottom-square", {
         duration: 1,
         y: 100,
         ease: "back.out(1.4)"
@@ -743,7 +792,7 @@ const text_mask = ()=>{
         ease: "slow(0.1, 0.4, false)"
     });
 };
-const images_anim = (x, y, trigger, start, end)=>{
+const images_anim = (y, trigger, start, end)=>{
     (0, _gsapDefault.default).from(".background_image", {
         opacity: 0,
         y: -15,
@@ -753,68 +802,30 @@ const images_anim = (x, y, trigger, start, end)=>{
             toggleActions: "restart none none pause"
         }
     });
-    (0, _gsapDefault.default).to(".image_container", {
-        y: 3,
-        duration: 2.5,
-        repeat: -1,
-        yoyo: true
-    });
     const timeline = (0, _gsapDefault.default).timeline({
         scrollTrigger: {
             trigger: trigger,
             start: start,
             end: end,
             pin: ".presentation",
-            pinSpacing: false,
             scrub: true,
-            markers: true
+            duration: 15
         }
     });
     timeline.from(".one", {
-        x: x,
         y: y,
         opacity: 0,
-        duration: 2
+        duration: 5
     }).from(".two", {
-        x: -x,
+        y: y,
         opacity: 0,
-        rotateY: -30,
-        duration: 2,
+        duration: 5,
         ease: "expo.out"
     }).from(".three", {
-        x: x,
+        y: y,
         opacity: 0,
-        rotateY: 30,
-        duration: 2,
+        duration: 5,
         ease: "expo.out"
-    });
-    (0, _gsapDefault.default).to("#circle", {
-        x: 5,
-        y: 8,
-        z: 5,
-        duration: 3,
-        ease: "power2.out",
-        repeat: -1,
-        yoyo: true
-    });
-    (0, _gsapDefault.default).to("#eclipse", {
-        x: 3,
-        y: 2,
-        z: 5,
-        rotation: -1,
-        duration: 3,
-        ease: "power2.out",
-        repeat: -1,
-        yoyo: true
-    });
-    (0, _gsapDefault.default).to("#triangle", {
-        y: 5,
-        z: 5,
-        rotation: -2,
-        duration: 3,
-        ease: "power2.out",
-        repeat: -1,
-        yoyo: true
     });
 };
 const text_scroll = ()=>{

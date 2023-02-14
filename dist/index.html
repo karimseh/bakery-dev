@@ -10,6 +10,9 @@
     <title>Pâtisserie Alexis Ladvie</title>
   </head>
   <body>
+    <div id="loading-screen">
+      <p>0%</p>
+    </div>
     <section class="section home">
       <div class="grid_fondant">
           <div class="fondant"></div>
@@ -193,7 +196,6 @@
         </div>
       </div>
     </section>
-    <section class="section"></section>
     <section class="section gateaux">
       <div class="content">
         <div class="image_gateaux">
@@ -255,6 +257,36 @@
       </div>
     </section>
     <section class="section"></section>
+    <section class="section visit">
+      <div class="content">
+        <h1>Qu'attendez vous ?</h1>
+        <a href="#" id="visit_us">
+          <button type="button" class="btn">
+            Visitez notre boutique 
+          </button>
+        </a>
+      </div>
+    </section>
+    <script>let urls = [
+    "js/main.js",
+    "js/Animations.js"
+];
+let loaded = 0;
+urls.forEach(function(url) {
+    let xhr = new XMLHttpRequest();
+    xhr.open("GET", url, true);
+    xhr.onload = function() {
+        loaded++;
+        updateProgress(loaded / urls.length * 100);
+    };
+    xhr.send();
+});
+function updateProgress(percentage) {
+    // Update the progress bar UI
+    document.querySelector("#loading-screen > p").innerHTML = `${percentage}%`;
+}
+
+</script>
     <script src="/index.18dbc454.js" defer=""></script>
   </body>
 </html>
